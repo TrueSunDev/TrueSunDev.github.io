@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"truesundev.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.28.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="深入理解计算机系统 计算机系统漫游hello.c程序 1234567#include &lt;stdio.h&gt;int main()&#123;    printf(&quot;hello, world\n&quot;);    return 0;&#125;  编译系统(compilation system)包括预处理器、编译器、汇编器和链接器。 预处理阶段。预处理器(cpp)根据以字符#开">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SunBlog">
+<meta property="og:url" content="https://truesundev.github.io/2026/07/31/CSAPP%20Notes/CSAPP%20Notes/index.html">
+<meta property="og:site_name" content="SunBlog">
+<meta property="og:description" content="深入理解计算机系统 计算机系统漫游hello.c程序 1234567#include &lt;stdio.h&gt;int main()&#123;    printf(&quot;hello, world\n&quot;);    return 0;&#125;  编译系统(compilation system)包括预处理器、编译器、汇编器和链接器。 预处理阶段。预处理器(cpp)根据以字符#开">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-07-31T12:56:12.587Z">
+<meta property="article:modified_time" content="2026-05-14T13:06:54.950Z">
+<meta property="article:author" content="TrueSunDev">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://truesundev.github.io/2026/07/31/CSAPP%20Notes/CSAPP%20Notes/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://truesundev.github.io/2026/07/31/CSAPP%20Notes/CSAPP%20Notes/","path":"2026/07/31/CSAPP Notes/CSAPP Notes/","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | SunBlog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">SunBlog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8"><span class="nav-number">1.</span> <span class="nav-text">计算机系统漫游</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">信息表示和处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E5%AD%98%E5%82%A8"><span class="nav-number">2.1.</span> <span class="nav-text">信息存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%88%B6%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="nav-number">2.1.1.</span> <span class="nav-text">进制表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E6%95%B0%E6%8D%AE%E5%A4%A7%E5%B0%8F"><span class="nav-number">2.1.2.</span> <span class="nav-text">字数据大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BB%E5%9D%80%E5%92%8C%E5%AD%97%E8%8A%82%E9%A1%BA%E5%BA%8F"><span class="nav-number">2.1.3.</span> <span class="nav-text">寻址和字节顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E7%A4%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">2.1.4.</span> <span class="nav-text">表示字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E7%A4%BA%E4%BB%A3%E7%A0%81"><span class="nav-number">2.1.5.</span> <span class="nav-text">表示代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E4%BB%A3%E6%95%B0%E7%AE%80%E4%BB%8B"><span class="nav-number">2.1.6.</span> <span class="nav-text">布尔代数简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8D%E7%BA%A7%E8%BF%90%E7%AE%97"><span class="nav-number">2.1.7.</span> <span class="nav-text">位级运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97"><span class="nav-number">2.1.8.</span> <span class="nav-text">逻辑运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="nav-number">2.1.9.</span> <span class="nav-text">移位运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.2.</span> <span class="nav-text">整数表示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.2.1.</span> <span class="nav-text">整数数据类型</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">TrueSunDev</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://truesundev.github.io/2026/07/31/CSAPP%20Notes/CSAPP%20Notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="TrueSunDev">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SunBlog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | SunBlog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-07-31 20:56:12" itemprop="dateCreated datePublished" datetime="2026-07-31T20:56:12+08:00">2026-07-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-05-14 21:06:54" itemprop="dateModified" datetime="2026-05-14T21:06:54+08:00">2026-05-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>深入理解计算机系统</p>
+<h1 id="计算机系统漫游"><a href="#计算机系统漫游" class="headerlink" title="计算机系统漫游"></a>计算机系统漫游</h1><p>hello.c程序</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello, world\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译系统(compilation system)包括预处理器、编译器、汇编器和链接器。</p>
+<p>预处理阶段。预处理器(cpp)根据以字符#开头的命令，修改原始的C程序，得到另一个C程序，通常以.i作为文件扩展名。如hello.c中第1行的#include &lt;stdio.h&gt; 命令告诉预处理器读取系统头文件 stdio.h 的内容，并把它直接插入程序文本。</p>
+<p>编译阶段。</p>
+<p>汇编阶段。</p>
+<p>链接阶段。链接器(ld)负责将程序中调用的函数等目标文件中合并到.o文件中。</p>
+<h1 id="信息表示和处理"><a href="#信息表示和处理" class="headerlink" title="信息表示和处理"></a>信息表示和处理</h1><h2 id="信息存储"><a href="#信息存储" class="headerlink" title="信息存储"></a>信息存储</h2><p>多数计算机使用8位的块，或者字节(byte)，作为最小的可寻址的内存单位，而不是访问内存中单独的位。</p>
+<p>机器级程序将内存视为一个非常大的字节数组，称为虚拟内存(virtual memory)。内存的每个字节都由一个唯一的数字来标识，成为它的地址(address)，所有可能地址的集合称为虚拟地址空间(virtual address space)。</p>
+<h3 id="进制表示法"><a href="#进制表示法" class="headerlink" title="进制表示法"></a>进制表示法</h3><p>常用的进制表示法：二进制、十进制、十六进制(hex)。</p>
+<p>以0x或0X开头的数字常量被认为是十六进制的值，’A’~’F’不区分大小写，可以混用，0xFA1D37B&#x3D;0xfa1d73b&#x3D;0xFA1d73b</p>
+<h3 id="字数据大小"><a href="#字数据大小" class="headerlink" title="字数据大小"></a>字数据大小</h3><p>每台计算机都有一个字长(word size)，指明指针数据的标称大小(nominal size)。因为虚拟地址是以这样的一个字长来编码的，所以字长决定的最重要的系统参数就是虚拟地址空间的最大大小。即针对一个字长为 $w$ 位的机器而言，虚拟地址的范围为 $0\sim 2^w-1$，程序最多访问 $2^w$ 个字节。</p>
+<p>C++基本数据类型的典型大小</p>
+<table>
+<thead>
+<tr>
+<th align="center">C++声明</th>
+<th></th>
+<th>字节数</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">有符号</td>
+<td>无符号</td>
+<td>32位</td>
+<td>64位</td>
+</tr>
+<tr>
+<td align="center">[signed] char</td>
+<td>unsigned char</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td align="center">short</td>
+<td>unsigned short</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td>unsigned</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td align="center">long</td>
+<td>unsigned long</td>
+<td>4</td>
+<td>8</td>
+</tr>
+<tr>
+<td align="center">int32_t</td>
+<td>uint32_t</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td align="center">int64_t</td>
+<td>uint64_t</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td align="center">char *</td>
+<td></td>
+<td>4</td>
+<td>8</td>
+</tr>
+<tr>
+<td align="center">float</td>
+<td></td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td></td>
+<td>8</td>
+<td>8</td>
+</tr>
+</tbody></table>
+<p>C++目前对于数据类型的大小的下界有约束，但对上界无约束。</p>
+<p>在C++中对于关键字的顺序以及包括或忽略可选关键字，允许存在多种形式：</p>
+<p>unsigned long &#x2F; unsigned long int &#x2F; long unsigned &#x2F; long unsigned int</p>
+<h3 id="寻址和字节顺序"><a href="#寻址和字节顺序" class="headerlink" title="寻址和字节顺序"></a>寻址和字节顺序</h3><p>表示跨越多字节的程序对象需要明确：对象的地址是什么，以及在内容中如何排列这些字节。</p>
+<p>默认多字节对象被存储为连续的字节序列，对象的地址为所使用字节中最小的地址。</p>
+<p>排列表示一个对象的字节有两个通用的规则，一是小端法(little endian)，最低有效字节在最前面；一是大端法(big endian)，最高有效字节在最前面。</p>
+<p>对于变量0x01234567，地址由低到高，小端法存储67-&gt;45-&gt;23-&gt;01，大端法存储01-&gt;23-&gt;45-&gt;67。</p>
+<h3 id="表示字符串"><a href="#表示字符串" class="headerlink" title="表示字符串"></a>表示字符串</h3><p>在使用ASCII码作为字符码的任何系统上都将得到相同的结果，与字节顺序和字大小规则无关，文本数据比二进制数据具有更强的平台独立性。</p>
+<h3 id="表示代码"><a href="#表示代码" class="headerlink" title="表示代码"></a>表示代码</h3><p>不同的机器类型使用不同的且不兼容的指令和编码方式，即使是完全相同的进程，运行在不同的操作系统上也会有不同的编码规则，因此二进制代码是不兼容的。二进制代码很少能在不同机器和操作系统组合之间移植。相同的程序经编译后在不同的机器或操作系统上机器代码可能完全不同。</p>
+<p>计算机系统的一个基本概念就是，从机器的角度来看，程序仅仅只是字节序列。机器没有关于原始源程序的任何信息，除了可能有些用来帮助调试的辅助表以外。</p>
+<h3 id="布尔代数简介"><a href="#布尔代数简介" class="headerlink" title="布尔代数简介"></a>布尔代数简介</h3><p>布尔代数(Boolean algebra)：通过将逻辑值TRUE(真)和FALSE(假)编码为二进制值1和0，设计出一种代码，以研究逻辑推理的基本原则。</p>
+<p>布尔代数的运算：~对应逻辑运算NOT，&amp;对应逻辑运算AND，|对应逻辑运算OR，^对应逻辑运算异或XOR。</p>
+<p>4个基本的布尔运算可扩展到位向量的运算，位向量是固定长度为 $w$、由0和1组成的串。位向量的运算可以定义成参数的每个对应元素之间的运算。</p>
+<p>布尔运算的分配律：$a&amp;(b|c)&#x3D;(a&amp;b)|(a&amp;c)$，$a|(b&amp;c)&#x3D;(a|b)&amp;(a|c)$，$a\wedge a&#x3D;0$，$a\wedge b&#x3D;(a&amp;\sim b)|(\sim a&amp;b)$。</p>
+<p>位向量可以用于表示有限集合，可用位向量 $[a_{w-1}, \dots, a_1,a_0]$ 编码任意子集合 $A\subseteq{0,1,\dots,w-1}$，其中 $a_i&#x3D;1$ 当且仅当 $i\in A$。使用位向量编码集合，布尔运算|和&amp;分别对应于集合的并和交，而~对应于集合的补。</p>
+<h3 id="位级运算"><a href="#位级运算" class="headerlink" title="位级运算"></a>位级运算</h3><p>位级运算一个常见用法是实现掩码运算，掩码是一个位模式，表示从一个字中选出的位的集合，如掩码0xFF表示一个字的低位字节，位级运算x&amp;0xFF生成一个由x的最低有效字节组成的值，而其他的字节被置为0。</p>
+<h3 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h3><p>||、&amp;&amp;、！</p>
+<p>逻辑运算与位级运算不同，逻辑运算认为所有非零的参数都表示TRUE，而参数0表示FALSE，它们返回1或0，分别表示结果为TRUE或FALSE。</p>
+<p>如果对第一个参数求值就能确定表达式的结果，则逻辑运算符不会对第二个参数求值。如a&amp;&amp;5&#x2F;a不会造成被零除。</p>
+<h3 id="移位运算"><a href="#移位运算" class="headerlink" title="移位运算"></a>移位运算</h3><p>移位运算从左向右结合。</p>
+<p>向左移位：x&lt;&lt;k，x向左移动k位，丢弃最高的k位，并在右端补k个0。</p>
+<p>向右移位：x&gt;&gt;k，共两种不同的右移。逻辑右移：在左端补k个0。算术右移：在左端补k个最高有效位的值。</p>
+<h2 id="整数表示"><a href="#整数表示" class="headerlink" title="整数表示"></a>整数表示</h2><h3 id="整数数据类型"><a href="#整数数据类型" class="headerlink" title="整数数据类型"></a>整数数据类型</h3>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/07/31/C++%20Primer%20Plus%20Notes/C++%20Primer%20Plus%20Notes/" rel="prev" title="">
+                  <i class="fa fa-angle-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">TrueSunDev</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
